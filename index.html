@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PixelGallery - Explore the World</title>
+  <meta name="description" content="A curated collection of beautiful moments. Explore nature, animals, cities, technology, and people photography.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. NAVIGATION BAR
+       ========================================================================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <!-- Left: Logo & Brand Name -->
+      <a href="#" class="brand-logo" aria-label="PixelGallery Home">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+          <circle cx="12" cy="13" r="4"></circle>
+        </svg>
+        <span class="logo-text">Pixel<span class="logo-accent">Gallery</span></span>
+      </a>
+
+      <!-- Mobile Hamburger Toggle Button -->
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+        <svg class="hamburger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Center Nav Links -->
+      <nav class="nav-menu" id="navMenu">
+        <a href="#" class="nav-link active">Home</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <!-- Right: Search Input Box -->
+      <div class="search-wrapper">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search images..." aria-label="Search images by title or category">
+        <button id="clearSearch" class="clear-search-btn" aria-label="Clear search query" style="display: none;">&times;</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       2. HERO SECTION
+       ========================================================================== -->
+  <section class="hero-section" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Explore the <span class="accent-text">World</span></h1>
+      <p class="hero-subtitle">A curated collection of beautiful moments</p>
+      <a href="#gallery" class="hero-btn">
+        <span>Discover More</span>
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       3. MAIN GALLERY SECTION
+       ========================================================================== -->
+  <main class="gallery-section" id="gallery">
+    <div class="section-container">
+      
+      <!-- Category Filter Tabs -->
+      <div class="filter-wrapper">
+        <div class="filter-tabs" id="filterTabs" role="tablist" aria-label="Image category filters">
+          <button class="filter-btn active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-category="nature" role="tab" aria-selected="false">Nature</button>
+          <button class="filter-btn" data-category="animals" role="tab" aria-selected="false">Animals</button>
+          <button class="filter-btn" data-category="cities" role="tab" aria-selected="false">Cities</button>
+          <button class="filter-btn" data-category="technology" role="tab" aria-selected="false">Technology</button>
+          <button class="filter-btn" data-category="people" role="tab" aria-selected="false">People</button>
+        </div>
+      </div>
+
+      <!-- Responsive Gallery Grid -->
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- Rendered dynamically via script.js -->
+      </div>
+
+      <!-- Empty Search Result State -->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <line x1="8" y1="11" x2="14" y2="11"></line>
+        </svg>
+        <h3>No images found</h3>
+        <p>No photography matches your current filter or search query.</p>
+        <button id="resetFilterBtn" class="reset-filter-btn">Reset Filters</button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       4. LIGHTBOX MODAL
+       ========================================================================== -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image Lightbox Modal">
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <div class="lightbox-modal">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close modal">&times;</button>
+      
+      <div class="lightbox-image-wrapper">
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+
+        <div class="lightbox-img-container">
+          <img id="lightboxImage" src="" alt="" class="lightbox-img">
+        </div>
+
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+
+      <div class="lightbox-meta">
+        <h3 id="lightboxTitle" class="lightbox-title">Image Title</h3>
+        <span id="lightboxCounter" class="lightbox-counter">1 / 12</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       5. FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="footer-container">
+      
+      <!-- Brand & Tagline -->
+      <div class="footer-brand">
+        <a href="#" class="brand-logo" aria-label="PixelGallery Footer Brand">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+            <circle cx="12" cy="13" r="4"></circle>
+          </svg>
+          <span class="logo-text">Pixel<span class="logo-accent">Gallery</span></span>
+        </a>
+        <p class="footer-tagline">Capturing beauty, one image at a time.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-nav">
+        <a href="#">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div class="footer-socials">
+        <a href="#" aria-label="GitHub Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="Instagram Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" aria-label="Twitter / X Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+          </svg>
+        </a>
+        <a href="#" aria-label="LinkedIn Profile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 PixelGallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
